@@ -14,7 +14,7 @@ CUSTOMER_ID=$3
 EXECUTE_DEPLOY=$4
 
 # Run customer specific stage script to stage artifacts
-chmod 0777 ${CUSTOMER_ID}/stage_and_deploy_artifacts.sh || { exit 1;}
+chmod 0755 ${CUSTOMER_ID}/stage_and_deploy_artifacts.sh || { exit 1;}
 ${CUSTOMER_ID}/stage_and_deploy_artifacts.sh ${UNIT_PATH} ${STAGE_BASE_DIR} ${CUSTOMER_ID} ${EXECUTE_DEPLOY} || { exit 1;}
 
 
