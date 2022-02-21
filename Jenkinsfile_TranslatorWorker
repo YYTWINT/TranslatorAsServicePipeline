@@ -1,0 +1,72 @@
+def gv
+def emailHandle
+
+pipeline {
+    agent any
+	parameters {
+		string(name: 'NXRelease', defaultValue: 'nx2206.latest', description : 'Use the latest IP from NX2206 release to create the build.')
+		string(name: 'UnitPath', defaultValue: '/plm/pnnas/ppic/users/yytwint/JenkinsBase/units/NX2206', description : 'Path where build unit for the run is to be created.')
+		string(name: 'StagePath', defaultValue: '/plm/pnnas/ppic/users/yytwint/JenkinsBase/stage/NX2206', description : 'Path where translator worker kits are to be staged.')
+		choice(name: 'Customer', choices: ['TRX22','ISIM'])
+		booleanParam(name: 'Deploy', defaultValue: false, description : 'To deploy staging directory contents to customer setup')
+	}
+    stages {
+		stage ('init'){
+			steps {
+				script{
+					gv = load "TranslatorWorkerScripts.groovy"
+					emailHandle = load "email.groovy"
+				}
+			}
+		}
+		
+		stage('CreateUnit') {
+            agent { label 'TRX22-build-machine-yytwint' }
+            steps {
+				script{
+					gv.createUnit() 
+				}					
+            }
+        }
+        stage('Build') {
+            agent { label 'TRX22-build-machine-yytwint' }
+            steps {
+				script{
+					gv.buildUnit() 
+				}					
+            }
+        }
+		stage('Test') {
+            agent { label 'TRX22-build-machine-yytwint' }
+            steps {
+				script{
+					gv.TestUnit() 
+				}					
+            }
+        }
+		stage('Stage') {
+            agent { label 'TRX22-build-machine-yytwint' }
+            steps {
+				script{
+					gv.Stage() 
+				}					
+            }
+        }
+    }
+
+    post {
+		
+        success {
+            echo 'All tasks completed successfully.'
+        }
+		failure {
+			echo 'One or more stages have failed.'
+		}
+		always {
+			script{
+				emailHandle.sendSuccessEmail()
+			}					
+		}
+		
+    }
+}
