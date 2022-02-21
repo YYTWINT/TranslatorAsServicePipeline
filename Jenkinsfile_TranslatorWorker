@@ -68,7 +68,7 @@ pipeline {
 		}
 		always {
 			script{
-				emailHandle.sendSuccessEmail()
+				emailHandle.sendSuccessEmail(buildDir,stageDir)
 			}					
 		}
 		
