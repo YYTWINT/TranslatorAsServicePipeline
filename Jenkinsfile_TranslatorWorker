@@ -25,7 +25,7 @@ pipeline {
 		}
 		
 		stage('CreateUnit') {
-            agent { label 'TAAS-build-machine-yytwint' }
+            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
             steps {
 				script{
 					gv.createUnit(buildDir) 
@@ -33,7 +33,7 @@ pipeline {
             }
         }
         stage('Build') {
-            agent { label 'TAAS-build-machine-yytwint' }
+            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
             steps {
 				script{
 					gv.buildUnit(buildDir) 
@@ -41,7 +41,7 @@ pipeline {
             }
         }
 		stage('Test') {
-            agent { label 'TAAS-build-machine-yytwint' }
+            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
             steps {
 				script{
 					gv.TestUnit(buildDir) 
@@ -49,7 +49,7 @@ pipeline {
             }
         }
 		stage('StageAndDeploy') {
-            agent { label 'TAAS-build-machine-yytwint' }
+            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
             steps {
 				script{
 					gv.StageAndDeploy(buildDir,stageDir) 
