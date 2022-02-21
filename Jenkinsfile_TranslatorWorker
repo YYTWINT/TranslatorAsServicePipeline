@@ -41,7 +41,7 @@ pipeline {
             }
         }
 		stage('Test') {
-            agent { label 'SAAS_di2inpun0212lv0_yytwint_test' }
+            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
             steps {
 				script{
 					gv.TestUnit(buildDir) 
@@ -49,7 +49,7 @@ pipeline {
             }
         }
 		stage('StageAndDeploy') {
-            agent { label 'SAAS_di2inpun0212lv0_yytwint_test' }
+            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
             steps {
 				script{
 					gv.StageAndDeploy(buildDir,stageDir) 
