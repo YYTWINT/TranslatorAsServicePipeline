@@ -28,7 +28,7 @@ def TestUnit()
 	}
 }
 
-def Stage()
+def StageAndDeploy()
 {
 	echo "Executing stage..."
 	script{		
@@ -36,7 +36,7 @@ def Stage()
 		def stagePath="${params.StagePath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 		def customerId="${params.Customer}"
 		sh "chmod +x ./stageTranslatorWorkerUnit.sh "
-		sh "./stageTranslatorWorkerUnit.sh ${unitFullPath} ${stagePath} 'Artifacts/${customerId}'"		
+		sh "./stageAndTranslatorWorkerUnit.sh ${unitFullPath} ${stagePath} 'Artifacts/${customerId}'"		
 	}
 }
 

@@ -44,11 +44,11 @@ pipeline {
 				}					
             }
         }
-		stage('Stage') {
+		stage('StageAndDeploy') {
             agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
-					gv.Stage() 
+					gv.StageAndDeploy() 
 				}					
             }
         }
