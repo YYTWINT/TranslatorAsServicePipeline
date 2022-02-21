@@ -40,7 +40,7 @@ cp -f ${CUSTOMER_ARTIFACTS_DIR}/run_ugtopv ${STAGE_DIR}/run_ugtopv || { exit 1;}
 cp -f ${CUSTOMER_ARTIFACTS_DIR}/tessUG.config ${CONFIG_FILE} || { exit 1;}
 cp -f ${CUSTOMER_ARTIFACTS_DIR}/NXJT_Translator_README.txt ${STAGE_BASE_DIR}/ || { exit 1;}
 
-if [ ${EXECUTE_DEPLOY} -eq 'true' ]
+if [ ${EXECUTE_DEPLOY} == "true" ]
 then
 	echo "Deploy flag is set to true. Executing deploy step..."
 else
