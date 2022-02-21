@@ -52,7 +52,7 @@ pipeline {
             agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
-					gv.StageAndDeploy(buildDir) 
+					gv.StageAndDeploy(buildDir,stageDir) 
 				}					
             }
         }

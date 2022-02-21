@@ -1,32 +1,44 @@
 def createUnit(String buildDir)
 {
-	echo "Creating unit... ${buildDir}"
+	echo "Creating unit..."
 	script{		
-			
+		def unitFullPath="${buildDir}"
+		sh "chmod +x ./createTranslatorWorkerUnit.sh "
+		sh "./createTranslatorWorkerUnit.sh ${params.NXRelease} ${unitFullPath}"		
 	}
 }
 
 def buildUnit(String buildDir)
 {
-	echo "Building unit...${buildDir}"
+	echo "Building unit..."
 	script{		
-		
+		def unitFullPath="${buildDir}"
+		sh "chmod +x ./buildTranslatorWorkerUnit.sh "
+		sh "./buildTranslatorWorkerUnit.sh ${unitFullPath}"		
 	}
 }
 
 def TestUnit(String buildDir)
 {
-	echo "Executing devtests...${buildDir}"
+	echo "Executing devtests..."
 	script{		
-		
+		def unitFullPath="${buildDir}"
+		sh "chmod +x ./executeTranslatorWorkerTest.sh "
+		sh "./executeTranslatorWorkerTest.sh ${unitFullPath}"		
 	}
 }
 
-def StageAndDeploy(String buildDir)
+def StageAndDeploy(String buildDir, String stageDir)
 {
-	echo "Executing stage and deploy...${buildDir}"
+	echo "Executing stage and deploy..."
 	script{		
+		def unitFullPath="${buildDir}"
+		def stagePath="${stageDir}"
+		def customerId="${params.Customer}"
+		def deployFlag="${params.Deploy}"
 		
+		sh "chmod +x ./stageAndTranslatorWorkerUnit.sh "
+		sh "./stageAndTranslatorWorkerUnit.sh ${unitFullPath} ${stagePath} 'Artifacts/${customerId}' ${deployFlag}"		
 	}
 }
 
