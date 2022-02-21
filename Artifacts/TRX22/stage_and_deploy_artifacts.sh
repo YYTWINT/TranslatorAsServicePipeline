@@ -3,15 +3,15 @@
 if [ $# -ne 4 ]
 then
         echo "stage_and_deploy_artifacts.sh called with incorrect number of arguments."
-        echo "stage_and_deploy_artifacts.sh <StageBaseDir> <StageDir> <customer_artifacts_dir> <DeployFlag>"
-        echo "For example; stage_and_deploy_artifacts.sh /plm/pnnas/ppic/users/<stage_dir> /plm/pnnas/ppic/users/<stage_dir>/TranslatorWorker <Artifacts/TRX22> true/false"
+        echo "stage_and_deploy_artifacts.sh <unitPaht> <StageBaseDir> <CustomerArtifactDir>> <DeployFlag>"
+        echo "For example; stage_and_deploy_artifacts.sh /plm/pnnas/ppic/users/<unit_name> /plm/pnnas/ppic/users/<stage_dir> <Artifacts/TRX22> true/false"
         exit 1
 fi
 
 echo "Executing stage_and_deploy_artifacts.sh..."
 
-STAGE_BASE_DIR=$1
-STAGE_DIR=$2
+UNIT_PATH=$1
+STAGE_BASE_DIR=$2
 CUSTOMER_ARTIFACTS_DIR=$3
 EXECUTE_DEPLOY=$4
 

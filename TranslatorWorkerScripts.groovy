@@ -35,8 +35,9 @@ def StageAndDeploy()
 		def unitFullPath="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 		def stagePath="${params.StagePath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 		def customerId="${params.Customer}"
-		sh "chmod +x ./stageTranslatorWorkerUnit.sh "
-		sh "./stageAndTranslatorWorkerUnit.sh ${unitFullPath} ${stagePath} 'Artifacts/${customerId}'"		
+		def deployFlag="${params.Deploy}"
+		sh "chmod +x ./stageAndTranslatorWorkerUnit.sh "
+		sh "./stageAndTranslatorWorkerUnit.sh ${unitFullPath} ${stagePath} 'Artifacts/${customerId}' ${deployFlag}"		
 	}
 }
 
