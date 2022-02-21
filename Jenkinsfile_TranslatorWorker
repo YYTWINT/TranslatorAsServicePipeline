@@ -1,5 +1,7 @@
 def gv
 def emailHandle
+def buildDir
+def stageDir
 
 pipeline {
     agent any
@@ -16,6 +18,8 @@ pipeline {
 				script{
 					gv = load "TranslatorWorkerScripts.groovy"
 					emailHandle = load "email.groovy"
+					buildDir="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
+					stageDir="${params.StagePath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 				}
 			}
 		}
@@ -24,7 +28,7 @@ pipeline {
             agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
-					gv.createUnit() 
+					gv.createUnit(buildDir) 
 				}					
             }
         }
@@ -32,7 +36,7 @@ pipeline {
             agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
-					gv.buildUnit() 
+					gv.buildUnit(buildDir) 
 				}					
             }
         }
@@ -40,7 +44,7 @@ pipeline {
             agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
-					gv.TestUnit() 
+					gv.TestUnit(buildDir) 
 				}					
             }
         }
@@ -48,7 +52,7 @@ pipeline {
             agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
-					gv.StageAndDeploy() 
+					gv.StageAndDeploy(buildDir) 
 				}					
             }
         }
