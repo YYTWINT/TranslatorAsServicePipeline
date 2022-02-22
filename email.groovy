@@ -76,7 +76,7 @@ def sendSuccessEmail(String buildDir, String stageDir)
 	emailext(
 		subject: subject,
 		body: details,
-		to: 'rakesh.thakur@siemens.com'
+		to: 'yytwint.sisw@siemens.com,nilesh.lakhotia@siemens.com,dattaprasad.sonawadekar@siemens.com,rakesh.thakur@siemens.com'
 	)
 }
 return this
