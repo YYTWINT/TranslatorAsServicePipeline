@@ -12,6 +12,8 @@ fi
 WORK_DIR=$1
 KEEP_DIR_COUNT=3
 
+echo "Purging dir ${WORK_DIR}"
+
 cd ${WORK_DIR} || { exit 1;}
 
 dirNames=(`ls -tp | grep  '/$'`)
