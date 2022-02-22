@@ -25,6 +25,7 @@ then
         for ((number=KEEP_DIR_COUNT;number<numDirs;number++))
         do
 			echo "Deleting ${dirNames[${number}]}"
+			rm -rf ${dirNames[${number}]}
         done
 fi
 
