@@ -59,22 +59,7 @@ pipeline {
 				}					
             }
         }
-		stage('Purge Units') {
-			agent { label "${BUILD_AGENT}" }
-            steps {
-				script{
-					gv.Purge(${params.UnitPath}) 
-				}					
-            }
-		}
-		stage('Purge Stage') {
-			agent { label "${STAGE_AGENT}" }
-            steps {
-				script{
-					gv.Purge(${params.StagePath}) 
-				}					
-            }
-		}
+		
     }
 
     post {
