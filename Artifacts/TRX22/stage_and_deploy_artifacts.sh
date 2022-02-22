@@ -42,7 +42,21 @@ cp -f ${CUSTOMER_ARTIFACTS_DIR}/NXJT_Translator_README.txt ${STAGE_BASE_DIR}/ ||
 
 if [ ${EXECUTE_DEPLOY} == "true" ]
 then
-	echo "Deploy flag is set to true. Executing deploy step..."
+	INIT_DEF_FILE=${UNIT_PATH}/init.def
+	stringarray=(`grep DMS_PARENT_BASELINE ${INIT_DEF_FILE} || { exit 1;}`)
+	RELEASE_IP=${stringarray[1]}
+	echo "Deploy flag is set to true. Executing deploy step with release IP =${RELEASE_IP}..."
+	
+	releaseName=${RELEASE_IP}
+	
+	cd ${STAGE_BASE_DIR} || { exit 1;}
+	tar -czf $releaseName.tar.gz TranslatorBinaries/ || { exit 1;}
+	echo "curl -u opentools_bot:YL6MtwZ35 -T $releaseName.tar.gz https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
+
+	echo "curl -u opentools_bot:YL6MtwZ35 -T NXJT_Translator_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
+
+	cd -
+
 else
 	echo "Deploy flag is set to false. Skipping deploy step..."
 fi
