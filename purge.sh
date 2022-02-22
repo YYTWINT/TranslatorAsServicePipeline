@@ -13,7 +13,6 @@ WORK_DIR=$1
 KEEP_DIR_COUNT=3
 
 echo "Purging dir ${WORK_DIR}"
-exit 0
 
 cd ${WORK_DIR} || { exit 1;}
 
