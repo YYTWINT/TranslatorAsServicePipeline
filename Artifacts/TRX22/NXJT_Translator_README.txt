@@ -1,1 +1,0 @@
-Dummy readme for TRX22
