@@ -2,6 +2,9 @@ def gv
 def emailHandle
 def buildDir
 def stageDir
+def BUILD_AGENT='SAAS_di2inpun0050lv0_yytwint_build'
+def TEST_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
+def STAGE_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
 
 pipeline {
     agent any
@@ -25,7 +28,7 @@ pipeline {
 		}
 		
 		stage('CreateUnit') {
-            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
+            agent { label "${BUILD_AGENT}" }
             steps {
 				script{
 					gv.createUnit(buildDir) 
@@ -33,7 +36,7 @@ pipeline {
             }
         }
         stage('Build') {
-            agent { label 'SAAS_di2inpun0050lv0_yytwint_build' }
+            agent { label "${BUILD_AGENT}" }
             steps {
 				script{
 					gv.buildUnit(buildDir) 
@@ -41,7 +44,7 @@ pipeline {
             }
         }
 		stage('Test') {
-            agent { label 'SAAS_di2inpun0212lv0_yytwint_test' }
+            agent { label "${TEST_AGENT}" }
             steps {
 				script{
 					gv.TestUnit(buildDir) 
@@ -49,13 +52,27 @@ pipeline {
             }
         }
 		stage('StageAndDeploy') {
-            agent { label 'SAAS_di2inpun0212lv0_yytwint_test' }
+            agent { label "${STAGE_AGENT}" }
             steps {
 				script{
 					gv.StageAndDeploy(buildDir,stageDir) 
 				}					
             }
         }
+		stage('Purge') {
+			agent { label "${BUILD_AGENT}" }
+            steps {
+				script{
+					gv.Purge(${params.UnitPath}) 
+				}					
+            }
+			agent { label "${STAGE_AGENT}" }
+            steps {
+				script{
+					gv.Purge(${params.StagePath}) 
+				}					
+            }
+		}
     }
 
     post {

@@ -42,4 +42,14 @@ def StageAndDeploy(String buildDir, String stageDir)
 	}
 }
 
+def Purge(String dirName)
+{
+	echo "Executing Purge ..."
+	script{		
+		def fullPath="${dirName}"
+		sh "chmod +x ./purge.sh "
+		sh "./purge.sh ${fullPath}"		
+	}
+}
+
 return this
