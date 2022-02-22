@@ -2,9 +2,9 @@
 
 if [ $# -ne 4 ]
 then
-        echo "stageAndTranslatorWorkerUnit.sh called with incorrect number of arguments."
-        echo "stageAndTranslatorWorkerUnit.sh <UnitPath> <StageDir> <Customer> <DeployFlag>"
-        echo "For example; stageAndTranslatorWorkerUnit.sh /plm/pnnas/ppic/users/<unit_name> /plm/pnnas/ppic/users/<stage_dir> <TRX22> true/false"
+        echo "stageAndDeployTranslatorWorkerUnit.sh called with incorrect number of arguments."
+        echo "stageAndDeployTranslatorWorkerUnit.sh <UnitPath> <StageDir> <Customer> <DeployFlag>"
+        echo "For example; stageAndDeployTranslatorWorkerUnit.sh /plm/pnnas/ppic/users/<unit_name> /plm/pnnas/ppic/users/<stage_dir> <TRX22> true/false"
         exit 1
 fi
 
