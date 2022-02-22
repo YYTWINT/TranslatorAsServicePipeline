@@ -63,7 +63,7 @@ pipeline {
 			agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					path=${params.UnitPath}
+					path="${params.UnitPath}"
 					gv.Purge(path) 
 				}					
             }
