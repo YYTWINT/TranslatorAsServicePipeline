@@ -2,8 +2,8 @@ def sendSuccessEmail(String buildDir, String stageDir)
 {
 	def subject = "Job Executed '${env.JOB_NAME} - [${env.BUILD_NUMBER}] - ${currentBuild.currentResult}'"
 	def details = """
-				Hi team; \n
-				Please see details of latest build as below: \n\n
+				Hi team; <br>
+				Please see details of latest build as below: <br><br>
 				
 				 <style type="text/css">
 				.tg  {border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
@@ -68,8 +68,8 @@ def sendSuccessEmail(String buildDir, String stageDir)
 				</tbody>
 				</table>
 				
-				\n\n
-				Regards; \n
+				<br><br>
+				Regards; <br>
 				YYTWINT
 				
 				"""
