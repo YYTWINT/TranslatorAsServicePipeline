@@ -59,6 +59,15 @@ pipeline {
 				}					
             }
         }
+		stage('PurgeUnits') {
+			agent { label "${BUILD_AGENT}" }
+            steps {
+				script{
+					path=${params.UnitPath}
+					gv.Purge(path) 
+				}					
+            }
+		}
 		
     }
 
