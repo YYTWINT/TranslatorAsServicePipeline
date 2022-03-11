@@ -20,7 +20,7 @@ pipeline {
 		stage ('init'){
 			steps {
 				script{
-					gv = load "TranslatorWorkerScripts.groovy"
+					gv = load "TranslatorWorkerScripts_CP_image.groovy"
 					emailHandle = load "email.groovy"
 					buildDir="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 					stageDir="${params.StagePath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
