@@ -1,5 +1,10 @@
 def sendSuccessEmail(String buildDir, String stageDir)
 {
+	def CPNum = "NA";
+	if (params.myParam != null){
+		CPNum = ${params.CPNumber}
+	}
+ 
 	def subject = "Job Executed '${env.JOB_NAME} - [${env.BUILD_NUMBER}] - ${currentBuild.currentResult}'"
 	def details = """
 				Hi team; <br>
@@ -37,6 +42,12 @@ def sendSuccessEmail(String buildDir, String stageDir)
 					<td class="tg-hmp3">NX Release</td>
 					<td class="tg-hmp3">${params.NXRelease}</td>
 				  </tr>
+				  
+				  <tr>
+					<td class="tg-0lax">CP#</td>
+					<td class="tg-ur59">CPNum</td>
+				  </tr>
+				  
 				  <tr>
 					<td class="tg-0lax">Unit path</td>
 					<td class="tg-ur59">${buildDir}</td>
@@ -76,7 +87,7 @@ def sendSuccessEmail(String buildDir, String stageDir)
 	emailext(
 		subject: subject,
 		body: details,
-		to: 'yytwint.sisw@siemens.com,nilesh.lakhotia@siemens.com,dattaprasad.sonawadekar@siemens.com,rakesh.thakur@siemens.com'
+		to: 'rakesh.thakur@siemens.com'
 	)
 }
 return this
