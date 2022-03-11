@@ -21,11 +21,7 @@ def buildUnit(String buildDir)
 def TestUnit(String buildDir)
 {
 	echo "Executing devtests..."
-	script{		
-		def unitFullPath="${buildDir}"
-		sh "chmod +x ./executeTranslatorWorkerTest.sh "
-		sh "./executeTranslatorWorkerTest.sh ${unitFullPath}"		
-	}
+	
 }
 
 def StageAndDeploy(String buildDir, String stageDir)
