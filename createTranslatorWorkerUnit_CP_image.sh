@@ -18,3 +18,5 @@ sed -i 's/DO_TARI_RECOMPILES.*/DO_TARI_RECOMPILES       1/g' $initFile
 sed -i 's/DO_SOURCE_RECOMPILES.*/DO_SOURCE_RECOMPILES       1/g' $initFile
 sed -i 's/DO_LINK_OPT.*/DO_LINK_OPT       1/g' $initFile
 sed -i 's/DO_DEBUG.*/DO_DEBUG       0/g' $initFile
+sed -i 's/DO_QAZ.*/DO_QAZ       1/g' $initFile
+sed -i 's/DO_DLL_COMPARISON.*/DO_DLL_COMPARISON       1/g' $initFile
