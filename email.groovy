@@ -45,7 +45,7 @@ def sendSuccessEmail(String buildDir, String stageDir)
 				  
 				  <tr>
 					<td class="tg-0lax">CP#</td>
-					<td class="tg-ur59">CPNum</td>
+					<td class="tg-ur59">${CPNum}</td>
 				  </tr>
 				  
 				  <tr>
