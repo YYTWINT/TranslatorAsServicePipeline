@@ -2,7 +2,7 @@ def sendSuccessEmail(String buildDir, String stageDir)
 {
 	def CPNum = "NA";
 	if (params.CPNumber != null){
-		CPNum = ${params.CPNumber}
+		CPNum = params.CPNumber
 	}
  
 	def subject = "Job Executed '${env.JOB_NAME} - [${env.BUILD_NUMBER}] - ${currentBuild.currentResult}'"
