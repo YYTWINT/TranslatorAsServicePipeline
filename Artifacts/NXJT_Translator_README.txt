@@ -1,5 +1,5 @@
 NXJT Translator - v2206 Pre-Release version
-Apr 28, 2022
+May 23, 2022
 ==========================================
 
 SECTION 1 - Release Information
@@ -73,8 +73,8 @@ SECTION 3 - Installation Instructions and Usage
 			COPY mbd/       /app/mbd
 			COPY stage_model/   /app/stage_model
 			COPY diagramming/   /app/diagramming
-      COPY xlatorworker/  /app/xlatorworker
-      COPY vdv/           /app/vdv
+			COPY xlatorworker/  /app/xlatorworker
+			COPY vdv/           /app/vdv
 
 			COPY run_ugtopv_vis         /app/run_ugtopv_vis
 			COPY tessUG_vis.config      /app/tessUG_vis.config
