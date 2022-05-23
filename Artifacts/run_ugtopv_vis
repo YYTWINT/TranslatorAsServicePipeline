@@ -25,4 +25,5 @@ export LD_LIBRARY_PATH
 
 export UGII_LIB_PATH=${UGII_BASE_DIR}/nxbin
 
-exec ${APPNAME} "${@}" -enable_hybrid_saas -single_part
+exec ${APPNAME} "${@}" -enable_hybrid_saas -single_part -config=${UGII_BASE_DIR}/tessUG_vis.config
+

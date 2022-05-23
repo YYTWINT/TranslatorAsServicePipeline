@@ -3,8 +3,8 @@
 if [ $# -ne 4 ]
 then
         echo "stage_and_deploy_artifacts.sh called with incorrect number of arguments."
-        echo "stage_and_deploy_artifacts.sh <unitPaht> <StageBaseDir> <CustomerArtifactDir>> <DeployFlag>"
-        echo "For example; stage_and_deploy_artifacts.sh /plm/pnnas/ppic/users/<unit_name> /plm/pnnas/ppic/users/<stage_dir> <Artifacts/TRX22> true/false"
+        echo "stage_and_deploy_artifacts.sh <unitPaht> <StageBaseDir> <CustomerArtifactDir> <DeployFlag>"
+        echo "For example; stage_and_deploy_artifacts.sh /plm/pnnas/ppic/users/<unit_name> /plm/pnnas/ppic/users/<stage_dir> <Artifacts> true/false"
         exit 1
 fi
 
@@ -33,12 +33,21 @@ rm -rf ${STAGE_DIR}/debug || { exit 1;}
 rm -rf ${STAGE_DIR}/license || { exit 1;}
 rm -rf ${STAGE_DIR}/dockerfile || { exit 1;}
 
-CONFIG_FILE=${STAGE_DIR}/pvtrans/tessUG.config
-chmod 0755 ${CONFIG_FILE} || { exit 1;}
+CONFIG_FILE_MULTICAD=${STAGE_DIR}/tessUG_multicad.config
+CONFIG_FILE_VIS=${STAGE_DIR}/tessUG_vis.config
+RUN_UGTOPV_MULTICAD=${STAGE_DIR}/run_ugtopv_multicad
+RUN_UGTOPV_VIS=${STAGE_DIR}/run_ugtopv_vis
 
-cp -f ${CUSTOMER_ARTIFACTS_DIR}/run_ugtopv ${STAGE_DIR}/run_ugtopv || { exit 1;}
-cp -f ${CUSTOMER_ARTIFACTS_DIR}/tessUG.config ${CONFIG_FILE} || { exit 1;}
+cp -f ${CUSTOMER_ARTIFACTS_DIR}/run_ugtopv_multicad ${RUN_UGTOPV_MULTICAD} || { exit 1;}
+cp -f ${CUSTOMER_ARTIFACTS_DIR}/run_ugtopv_vis ${RUN_UGTOPV_VIS} || { exit 1;}
+cp -f ${CUSTOMER_ARTIFACTS_DIR}/tessUG_multicad.config ${CONFIG_FILE_MULTICAD} || { exit 1;}
+cp -f ${CUSTOMER_ARTIFACTS_DIR}/tessUG_vis.config ${CONFIG_FILE_VIS} || { exit 1;}
 cp -f ${CUSTOMER_ARTIFACTS_DIR}/NXJT_Translator_README.txt ${STAGE_BASE_DIR}/ || { exit 1;}
+
+chmod 0755 ${CONFIG_FILE_MULTICAD} || { exit 1;}
+chmod 0755 ${CONFIG_FILE_VIS} || { exit 1;}
+chmod 0755 ${RUN_UGTOPV_MULTICAD} || { exit 1;}
+chmod 0755 ${RUN_UGTOPV_VIS} || { exit 1;}
 
 if [ ${EXECUTE_DEPLOY} == "true" ]
 then
@@ -56,7 +65,6 @@ then
 	echo "curl -u opentools_bot:YL6MtwZ35 -T NXJT_Translator_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
 
 	cd -
-
 else
 	echo "Deploy flag is set to false. Skipping deploy step..."
 fi
