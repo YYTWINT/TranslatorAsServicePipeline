@@ -56,7 +56,8 @@ then
 	RELEASE_IP=${stringarray[1]}
 	echo "Deploy flag is set to true. Executing deploy step with release IP =${RELEASE_IP}..."
 	
-	releaseName=${RELEASE_IP}
+	orig=${RELEASE_IP}
+	releaseName=${orig//'.'/'_TranslatorWorker.'}
 	
 	cd ${STAGE_BASE_DIR} || { exit 1;}
 	tar -czf $releaseName.tar.gz TranslatorBinaries/ || { exit 1;}
