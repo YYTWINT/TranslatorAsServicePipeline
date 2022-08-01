@@ -67,7 +67,8 @@ pipeline {
             agent { label "${TEST_AGENT}" }
             steps {
 				script{
-					//gv.TestUnit(buildDir) 
+					//gv.TestUnit(buildDir)
+					echo 'echo statement.'					
 				}					
             }
         }
@@ -75,7 +76,8 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {
 				script{
-					//gv.StageAndDeploy(buildDir,stageDir) 
+					//gv.StageAndDeploy(buildDir,stageDir)
+					echo 'echo statement.'						
 				}					
             }
         }
@@ -83,7 +85,8 @@ pipeline {
 			agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					//gv.Purge("${params.UnitPath}") 
+					//gv.Purge("${params.UnitPath}")
+					echo 'echo statement.'	
 				}					
             }
 		}
@@ -91,7 +94,8 @@ pipeline {
 			agent { label "${STAGE_AGENT}" }
             steps {
 				script{
-					//gv.Purge("${params.StagePath}") 
+					//gv.Purge("${params.StagePath}")
+					echo 'echo statement.'	
 				}					
             }
 		}
