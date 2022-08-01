@@ -2,6 +2,7 @@ def gv
 def emailHandle
 def buildDir
 def stageDir
+def HCFlag
 def BUILD_AGENT='SAAS_di2inpun0050lv0_yytwint_build'
 def TEST_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
 def STAGE_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
@@ -20,10 +21,11 @@ pipeline {
 		stage ('init'){
 			steps {
 				script{
-					gv = load "TranslatorWorkerScriptstest.groovy"
-					emailHandle = load "email.groovy"
+					//gv = load "TranslatorWorkerScriptstest.groovy"
+					//emailHandle = load "email.groovy"
 					buildDir="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 					stageDir="${params.StagePath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
+					HCFlag="${params.HC}"
 				}
 			}
 		}
@@ -32,15 +34,15 @@ pipeline {
             agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					if (${params.HC}.equals("false")){
+					if ("${HCFlag}"=="false"){
 						//gv.createUnit(buildDir) 
-						echo 'create unit with hc false.'
+						echo "create unit with hc value ${HCFlag}."
 					}
 					else {
-					    def CP=${params.CPNumber}
-						if ( ${CP} != "0"){
+					    def CP="${params.CPNumber}"
+						if ( "${CP}" != "0"){
 							//gv.createHCUnit(buildDir)
-							echo "create unit with hc true and CP number ${params.CPNumber}."							
+							echo "create unit with hc true and ${CP} number ${params.CPNumber}."							
 						}
 						else{
 							echo 'CP number is not specified correctly.'						
@@ -53,13 +55,13 @@ pipeline {
             agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					if (${params.HC}.equals("false")){
+					if ("${HCFlag}"=="false"){
 						//gv.buildUnit(buildDir) 
 						echo 'build unit with hc false.'
 					}
 					else {
 						//gv.buildHCUnit(buildDir) 
-						echo 'build unit with hc true with cp ${params.CPNumber} .'
+						echo "build unit with hc true with cp ${params.CPNumber} ."
 					} 
 				}					
             }
