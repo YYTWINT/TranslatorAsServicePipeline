@@ -32,12 +32,13 @@ pipeline {
             agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					if (${params.HC} == "false"){
+					if (${params.HC}.equals("false")){
 						//gv.createUnit(buildDir) 
 						echo 'create unit with hc false.'
 					}
 					else {
-						if (${params.CPNumber} != "0"){
+					    def CP=${params.CPNumber}
+						if ( ${CP} != "0"){
 							//gv.createHCUnit(buildDir)
 							echo "create unit with hc true and CP number ${params.CPNumber}."							
 						}
@@ -52,7 +53,7 @@ pipeline {
             agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					if (${params.HC} == "false"){
+					if (${params.HC}.equals("false")){
 						//gv.buildUnit(buildDir) 
 						echo 'build unit with hc false.'
 					}
