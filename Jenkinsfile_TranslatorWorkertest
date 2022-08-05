@@ -34,20 +34,20 @@ pipeline {
             agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					//if ("${HCFlag}"=="false"){
+					if (("${HCFlag}"=="false") || ("${HCFlag}"=="true" && "${CP}" != "0")){
 						gv.createUnit(buildDir) 
 						echo "create unit with hc value ${HCFlag}."
-					//}
-					//else {
+					}
+					else {
 					//    def CP="${params.CPNumber}"
 					//	if ( "${CP}" != "0"){
 							//gv.createHCUnit(buildDir)
 					//		echo "create unit with hc true with CP number ${CP}."							
 					//	}
 					//	else{
-					//		echo 'CP number is not specified correctly.'						
+							echo 'CP number is not specified correctly.'						
 					//	} 
-					//}
+					}
 				}					
             }
         }
