@@ -1,7 +1,7 @@
 def createUnit(String buildDir)
 {
 	echo "Creating unit..."
-	echo "${HCFlag}"
+	echo "${params.HC}"
 	script{		
 		def unitFullPath="${buildDir}"
 		//sh "chmod +x ./createTranslatorWorkerUnit.sh "
