@@ -4,8 +4,8 @@ def createUnit(String buildDir)
 	echo "${params.HC}"
 	script{		
 		def unitFullPath="${buildDir}"
-		//sh "chmod +x ./createTranslatorWorkerUnit.sh "
-		//sh "./createTranslatorWorkerUnit.sh ${params.NXRelease} ${unitFullPath} ${params.HC}"		
+		sh "chmod +x ./createTranslatorWorkerUnittest.sh "
+		sh "./createTranslatorWorkerUnittest.sh ${params.NXRelease} ${unitFullPath} ${params.HC}"		
 	}
 }
 
