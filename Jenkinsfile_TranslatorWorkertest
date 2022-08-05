@@ -21,7 +21,7 @@ pipeline {
 		stage ('init'){
 			steps {
 				script{
-					//gv = load "TranslatorWorkerScriptstest.groovy"
+					gv = load "TranslatorWorkerScriptstest.groovy"
 					//emailHandle = load "email.groovy"
 					buildDir="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 					stageDir="${params.StagePath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
@@ -34,20 +34,20 @@ pipeline {
             agent { label "${BUILD_AGENT}" }
             steps {
 				script{
-					if ("${HCFlag}"=="false"){
-						//gv.createUnit(buildDir) 
+					//if ("${HCFlag}"=="false"){
+						gv.createUnit(buildDir) 
 						echo "create unit with hc value ${HCFlag}."
-					}
-					else {
-					    def CP="${params.CPNumber}"
-						if ( "${CP}" != "0"){
+					//}
+					//else {
+					//    def CP="${params.CPNumber}"
+					//	if ( "${CP}" != "0"){
 							//gv.createHCUnit(buildDir)
-							echo "create unit with hc true with CP number ${CP}."							
-						}
-						else{
-							echo 'CP number is not specified correctly.'						
-						} 
-					}
+					//		echo "create unit with hc true with CP number ${CP}."							
+					//	}
+					//	else{
+					//		echo 'CP number is not specified correctly.'						
+					//	} 
+					//}
 				}					
             }
         }
