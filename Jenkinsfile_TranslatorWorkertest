@@ -35,7 +35,7 @@ pipeline {
             steps {
 				script{
 					def CP="${params.CPNumber}"
-					if (("${HCFlag}"=="false") || ("${HCFlag}"=="true" && "${CP}" != "0")){
+					if (("${HCFlag}"=="false") || (("${HCFlag}"=="true") && ("${CP}"!="0"))){
 						gv.createUnit(buildDir) 
 						echo "create unit with hc value ${HCFlag}."
 					}
