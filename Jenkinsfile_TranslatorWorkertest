@@ -42,7 +42,7 @@ pipeline {
 						BUILD_PROCESS_FLAG=true
 					}
 					else {
-						error "CP number is not specified correctly so skipping Group build and testing!"
+						error "you have selected HC option but CP number is not specified correctly so skipping Group build and testing!"
 						BUILD_PROCESS_FLAG=false						
 					}
 				}					
