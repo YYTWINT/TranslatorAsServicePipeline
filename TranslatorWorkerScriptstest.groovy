@@ -22,10 +22,11 @@ def createHCUnit(String buildDir)
 def buildUnit(String buildDir)
 {
 	echo "Building unit..."
+	echo "${params.HC}"
 	script{		
 		def unitFullPath="${buildDir}"
-		sh "chmod +x ./buildTranslatorWorkerUnit.sh "
-		sh "./buildTranslatorWorkerUnit.sh ${unitFullPath}"		
+		sh "chmod +x ./buildTranslatorWorkerUnittest.sh "
+		sh "./buildTranslatorWorkerUnittest.sh ${unitFullPath} ${params.CPNumber} ${params.HC}"		
 	}
 }
 

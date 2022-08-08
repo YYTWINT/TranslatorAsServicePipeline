@@ -3,6 +3,7 @@ def emailHandle
 def buildDir
 def stageDir
 def HCFlag
+def BUILD_PROCESS_FLAG
 def BUILD_AGENT='SAAS_di2inpun0050lv0_yytwint_build'
 def TEST_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
 def STAGE_AGENT='SAAS_di2inpun0212lv0_yytwint_test'
@@ -38,6 +39,7 @@ pipeline {
 					if (("${HCFlag}"=="false") || (("${HCFlag}"=="true") && ("${CP}"!="0"))){
 						gv.createUnit(buildDir) 
 						echo "create unit with hc value ${HCFlag}."
+						BUILD_PROCESS_FLAG=true
 					}
 					else {
 					//    def CP="${params.CPNumber}"
@@ -46,7 +48,8 @@ pipeline {
 					//		echo "create unit with hc true with CP number ${CP}."							
 					//	}
 					//	else{
-							echo 'CP number is not specified correctly.'						
+							echo 'CP number is not specified correctly.'
+							BUILD_PROCESS_FLAG=false						
 					//	} 
 					}
 				}					
@@ -54,16 +57,19 @@ pipeline {
         }
         stage('Build') {
             agent { label "${BUILD_AGENT}" }
+			when {
+					expression { "${BUILD_PROCESS_FLAG}"=="true" }
+				}
             steps {
 				script{
-					if ("${HCFlag}"=="false"){
-						//gv.buildUnit(buildDir) 
-						echo 'build unit with hc false.'
-					}
-					else {
+					//if ("${HCFlag}"=="false"){
+						gv.buildUnit(buildDir) 
+						echo "build unit with ${HCFlag}."
+					//}
+					//else {
 						//gv.buildHCUnit(buildDir) 
-						echo "build unit with hc true with cp ${params.CPNumber} ."
-					} 
+						//echo "build unit with hc true with cp ${params.CPNumber} ."
+					//} 
 				}					
             }
         }
