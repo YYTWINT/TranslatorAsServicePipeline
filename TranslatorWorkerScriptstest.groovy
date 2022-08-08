@@ -9,16 +9,6 @@ def createUnit(String buildDir)
 	}
 }
 
-def createHCUnit(String buildDir)
-{
-	echo "Creating unit..."
-	script{		
-		def unitFullPath="${buildDir}"
-		sh "chmod +x ./createTranslatorWorkerUnit_CP_image.sh "
-		sh "./createTranslatorWorkerUnit_CP_image.sh ${params.NXRelease} ${unitFullPath}"		
-	}
-}
-
 def buildUnit(String buildDir)
 {
 	echo "Building unit..."
@@ -30,15 +20,6 @@ def buildUnit(String buildDir)
 	}
 }
 
-def buildHCUnit(String buildDir)
-{
-	echo "Building unit..."
-	script{		
-		def unitFullPath="${buildDir}"
-		sh "chmod +x ./buildTranslatorWorkerUnit_CP_image.sh "
-		sh "./buildTranslatorWorkerUnit_CP_image.sh ${unitFullPath} ${params.CPNumber}"		
-	}
-}
 def TestUnit(String buildDir)
 {
 	echo "Executing devtests..."

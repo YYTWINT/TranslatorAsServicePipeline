@@ -42,15 +42,8 @@ pipeline {
 						BUILD_PROCESS_FLAG=true
 					}
 					else {
-					//    def CP="${params.CPNumber}"
-					//	if ( "${CP}" != "0"){
-							//gv.createHCUnit(buildDir)
-					//		echo "create unit with hc true with CP number ${CP}."							
-					//	}
-					//	else{
-							echo 'CP number is not specified correctly.'
-							BUILD_PROCESS_FLAG=false						
-					//	} 
+						echo 'CP number is not specified correctly.'
+						BUILD_PROCESS_FLAG=false						
 					}
 				}					
             }
@@ -62,19 +55,15 @@ pipeline {
 				}
             steps {
 				script{
-					//if ("${HCFlag}"=="false"){
 						gv.buildUnit(buildDir) 
-						echo "build unit with ${HCFlag}."
-					//}
-					//else {
-						//gv.buildHCUnit(buildDir) 
-						//echo "build unit with hc true with cp ${params.CPNumber} ."
-					//} 
 				}					
             }
         }
 		stage('Test') {
             agent { label "${TEST_AGENT}" }
+			when {
+					expression { "${BUILD_PROCESS_FLAG}"=="true" }
+				}
             steps {
 				script{
 					//gv.TestUnit(buildDir)
@@ -84,6 +73,9 @@ pipeline {
         }
 		stage('StageAndDeploy') {
             agent { label "${STAGE_AGENT}" }
+			when {
+					expression { "${BUILD_PROCESS_FLAG}"=="true" }
+				}
             steps {
 				script{
 					//gv.StageAndDeploy(buildDir,stageDir)
@@ -93,6 +85,9 @@ pipeline {
         }
 		stage('Purge Unit') {
 			agent { label "${BUILD_AGENT}" }
+			when {
+					expression { "${BUILD_PROCESS_FLAG}"=="true" }
+				}
             steps {
 				script{
 					//gv.Purge("${params.UnitPath}")
@@ -102,6 +97,9 @@ pipeline {
 		}
 		stage('Purge Stage') {
 			agent { label "${STAGE_AGENT}" }
+			when {
+					expression { "${BUILD_PROCESS_FLAG}"=="true" }
+				}
             steps {
 				script{
 					//gv.Purge("${params.StagePath}")
