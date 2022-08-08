@@ -13,11 +13,9 @@ CP_NUMBER=$2
 HC_FLAG=$3
 if [ ${HC_FLAG} == "false" ]
 then
-	echo "HC flag is false in build unit..."
 	#/usr/site/devop_tools/bin/unit run ${UNIT_PATH} b product TranslatorWorker
 	#/usr/site/devop_tools/bin/unit run ${UNIT_PATH} b product validate_worker TranslatorWorker
 else
-	echo "HC flag is true in build unit......"
 	# /usr/site/devop_tools/bin/unit run ${UNIT_PATH} /usr/site/devop_tools/bin/dt cli set -C -A ${CP_NUMBER}
 	# /usr/site/devop_tools/bin/unit run ${UNIT_PATH} b 
 	# /usr/site/devop_tools/bin/unit run ${UNIT_PATH} b image ugtopv
