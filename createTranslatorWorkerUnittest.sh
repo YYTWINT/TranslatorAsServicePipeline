@@ -14,8 +14,10 @@ HC_FLAG=$3
 
 if [ ${HC_FLAG} == "false" ]
 then
+	echo "in create unit if"
 	#/usr/site/devop_tools/bin/unit add -b -p @${NX_RELEASE} -t DEV -w SUB ${UNIT_PATH} -R y -O y -DO_LINK_OPT y
 else
+	echo "in create unit else"
 	# /usr/site/devop_tools/bin/unit add -b -p @${NX_RELEASE} -t DEV -w SUB ${UNIT_PATH} -R y -O y -DO_LINK_OPT y
 
 	# initFile=${UNIT_PATH}/init.def
