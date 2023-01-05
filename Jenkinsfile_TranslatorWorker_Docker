@@ -93,11 +93,7 @@ pipeline {
 		failure {
 			echo 'One or more stages have failed.'
 		}
-		always {
-			script{
-				emailHandle.sendSuccessEmail(buildDir,stageDir)
-			}					
-		}
+		
 		
     }
 }
