@@ -11,7 +11,9 @@ fi
 UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
 
+
 INIT_DEF_FILE=${UNIT_PATH}/init.def
+echo "INIT_DEF_FILE = $INIT_DEF_FILE"
 stringarray=(`grep DMS_PARENT_BASELINE ${INIT_DEF_FILE} || { exit 1;}`)
 NX_RELEASE=${stringarray[1]}
 	
