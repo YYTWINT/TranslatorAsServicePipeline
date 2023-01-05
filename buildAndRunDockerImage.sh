@@ -10,7 +10,6 @@ fi
 
 UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
-NX_RELEASE=2306.defLatest
 
 INIT_DEF_FILE=${UNIT_PATH}/init.def
 stringarray=(`grep DMS_PARENT_BASELINE ${INIT_DEF_FILE} || { exit 1;}`)
