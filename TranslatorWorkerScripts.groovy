@@ -50,5 +50,26 @@ def Purge(String dirName)
 		sh "./purge.sh ${fullPath}"		
 	}
 }
+def BuildAndRunDocker(String version, String stageDir)
+{
+	echo "Executing Build and Run docker script..."
+	script{		
+		def NXVersion="${version}"
+		def stagePath="${stageDir}"
+		
+		sh "chmod +x ./buildAndRunDockerImage.sh "
+		sh "./buildAndRunDockerImage.sh ${NXVersion} ${stagePath}"		
+	}
+}
+def DockerCleanup(String stageDir)
+{
+	echo "Executing Docker cleanup script..."
+	script{		
+		def stagePath="${stageDir}"
+		
+		sh "chmod +x ./cleanDocker.sh "
+		sh "./cleanDocker.sh ${stagePath}"		
+	}
+}
 
 return this
