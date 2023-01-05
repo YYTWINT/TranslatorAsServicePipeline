@@ -9,10 +9,10 @@ then
 fi
 
 NX_RELEASE=$1
-STAGE_DIR=$2
+STAGE_DIR=$2/TranslatorBinaries
 
 #STAGE_DIR=/apps/JenkinsBase/stage/Dev/nx2212.latest_TranslatorWorker_2023_01_02_18_33_24/lnx64/TranslatorBinaries/
-docker build -t trx22:$NX_RELEASE $STAGE_DIR -f $STAGE_DIR/TranslatorBinaries/dockerfile || { exit 1;} 
+docker build -t trx22:$NX_RELEASE $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;} 
 
 docker run -it -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" trx22:$NX_RELEASE
 
