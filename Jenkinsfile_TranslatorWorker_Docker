@@ -55,7 +55,7 @@ pipeline {
             agent { label "${STAGE_AGENT}" }
             steps {
 				script{
-					gv.BuildAndRunDocker(NXReleaseVersion,stageDir) 
+					gv.BuildAndRunDocker(buildDir,stageDir) 
 				}					
             }
         }

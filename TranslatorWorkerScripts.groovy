@@ -62,7 +62,7 @@ def StageForContainer(String buildDir, String stageDir)
 	}
 }
 
-def BuildAndRunDocker(String version, String stageDir)
+def BuildAndRunDocker(String buildDir, String stageDir)
 {
 	echo "Executing Build and Run docker script..."
 	script{		
