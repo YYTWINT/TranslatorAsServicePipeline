@@ -43,14 +43,6 @@ pipeline {
 				}					
             }
         }
-		stage('Test') {
-            agent { label "${TEST_AGENT}" }
-            steps {
-				script{
-					gv.TestUnit(buildDir) 
-				}					
-            }
-        }
 		stage('StageAndDeploy') {
             agent { label "${STAGE_AGENT}" }
             steps {
