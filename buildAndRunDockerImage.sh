@@ -3,15 +3,19 @@
 if [ $# -ne 2 ] 
 then
 	echo "buildDockerImage.sh called with incorrect number of arguments."
-	echo "buildDockerImage.sh <NXVersion> <StagePath> "
-	echo "For example; buildDockerImage.sh <NXVersion> /plm/pnnas/ppic/users/<staging path>"
+	echo "buildDockerImage.sh <UnitPath> <StagePath> "
+	echo "For example; buildDockerImage.sh /plm/pnnas/ppic/users/<unit path> /plm/pnnas/ppic/users/<staging path>"
 	exit 1
 fi
 
-NX_RELEASE=$1
+UNIT_PATH=$1
 STAGE_DIR=$2/TranslatorBinaries
+NX_RELEASE=2306.defLatest
 
-#STAGE_DIR=/apps/JenkinsBase/stage/Dev/nx2212.latest_TranslatorWorker_2023_01_02_18_33_24/lnx64/TranslatorBinaries/
+INIT_DEF_FILE=${UNIT_PATH}/init.def
+stringarray=(`grep DMS_PARENT_BASELINE ${INIT_DEF_FILE} || { exit 1;}`)
+NX_RELEASE=${stringarray[1]}
+	
 docker build -t trx22:$NX_RELEASE $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 1;} 
 
 docker run -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" trx22:$NX_RELEASE

@@ -66,11 +66,11 @@ def BuildAndRunDocker(String version, String stageDir)
 {
 	echo "Executing Build and Run docker script..."
 	script{		
-		def NXVersion="${version}"
+		def unitFullPath="${buildDir}"
 		def stagePath="${stageDir}"
 		
 		sh "chmod +x ./buildAndRunDockerImage.sh "
-		sh "./buildAndRunDockerImage.sh ${NXVersion} ${stagePath}"		
+		sh "./buildAndRunDockerImage.sh ${unitFullPath} ${stagePath}"		
 	}
 }
 def DockerCleanup(String stageDir)
