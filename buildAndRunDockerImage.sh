@@ -17,7 +17,7 @@ docker build -t trx22:$NX_RELEASE $STAGE_DIR -f $STAGE_DIR/dockerfile || { exit 
 docker run -v /apps/JenkinsBase/docker:/volume --cpus="1" --memory="2g" trx22:$NX_RELEASE
 
 #Now check for error in /volume/Logs/log.txt file
-LOG_FILE=/volume/Logs/log.txt
+LOG_FILE=/apps/JenkinsBase/docker/Logs/log.txt
 errorCount=0
 
 if [ -f $LOG_FILE ] 
