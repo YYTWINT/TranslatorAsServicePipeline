@@ -43,11 +43,11 @@ pipeline {
 				}					
             }
         }
-		stage('StageAndDeploy') {
+		stage('StageForContainer') {
             agent { label "${STAGE_AGENT}" }
             steps {
 				script{
-					gv.StageAndDeploy(buildDir,stageDir) 
+					gv.StageForContainer(buildDir,stageDir) 
 				}					
             }
         }
@@ -64,6 +64,14 @@ pipeline {
             steps {
 				script{
 					gv.DockerCleanup(stageDir) 
+				}					
+            }
+        }
+		stage('DeployContainer') {
+            agent { label "${STAGE_AGENT}" }
+            steps {
+				script{
+					gv.DeployContainer(stageDir) 
 				}					
             }
         }

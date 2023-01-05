@@ -31,6 +31,7 @@ cp -r ${SOURCE_PATH}/*   ${STAGE_DIR}/ || { exit 1;}
 # Then remove selected iteams
 rm -rf ${STAGE_DIR}/debug || { exit 1;}
 rm -rf ${STAGE_DIR}/license || { exit 1;}
+rm -rf ${STAGE_DIR}/dockerfile || { exit 1;}
 
 CONFIG_FILE_MULTICAD=${STAGE_DIR}/tessUG_multicad.config
 CONFIG_FILE_VIS=${STAGE_DIR}/tessUG_vis.config
@@ -59,7 +60,7 @@ then
 	releaseName=${orig//'.'/'_TranslatorWorker.'}
 	
 	cd ${STAGE_BASE_DIR} || { exit 1;}
-	echo tar -czf $releaseName.tar.gz TranslatorBinaries/ || { exit 1;}
+	tar -czf $releaseName.tar.gz TranslatorBinaries/ || { exit 1;}
 	echo "curl -u opentools_bot:YL6MtwZ35 -T $releaseName.tar.gz https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
 
 	echo "curl -u opentools_bot:YL6MtwZ35 -T NXJT_Translator_README.txt https://artifacts.industrysoftware.automation.siemens.com/artifactory/generic-local/Opentools/PREVIEW/NXtoJT/$releaseName/ || { exit 1;}"
@@ -68,12 +69,3 @@ then
 else
 	echo "Deploy flag is set to false. Skipping deploy step..."
 fi
-
-echo "COPY run_ugtopv_vis         /app/run_ugtopv_vis" >> ${STAGE_DIR}/dockerfile
-echo "COPY tessUG_vis.config      /app/tessUG_vis.config" >> ${STAGE_DIR}/dockerfile
-echo "COPY run_ugtopv_multicad         /app/run_ugtopv_multicad" >> ${STAGE_DIR}/dockerfile
-echo "COPY tessUG_multicad.config      /app/tessUG_multicad.config" >> ${STAGE_DIR}/dockerfile
-echo " " >> ${STAGE_DIR}/dockerfile
-echo " " >> ${STAGE_DIR}/dockerfile
-echo " " >> ${STAGE_DIR}/dockerfile
-echo "ENTRYPOINT /volume/run_docker" >> ${STAGE_DIR}/dockerfile

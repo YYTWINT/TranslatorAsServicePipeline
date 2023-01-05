@@ -50,6 +50,18 @@ def Purge(String dirName)
 		sh "./purge.sh ${fullPath}"		
 	}
 }
+def StageForContainer(String buildDir, String stageDir)
+{
+	echo "Executing stage and deploy..."
+	script{		
+		def unitFullPath="${buildDir}"
+		def stagePath="${stageDir}"
+		
+		sh "chmod +x ./stageForContainer.sh "
+		sh "./stageForContainer.sh ${unitFullPath} ${stagePath} 'Artifacts' "		
+	}
+}
+
 def BuildAndRunDocker(String version, String stageDir)
 {
 	echo "Executing Build and Run docker script..."
@@ -69,6 +81,19 @@ def DockerCleanup(String stageDir)
 		
 		sh "chmod +x ./cleanDocker.sh "
 		sh "./cleanDocker.sh ${stagePath}"		
+	}
+}
+
+def DeployContainer(String stageDir)
+{
+	echo "Executing DeployContainer..."
+	script{		
+		def stagePath="${stageDir}"
+		def deployFlag="${params.Deploy}"
+		def unitFullPath="${buildDir}"
+		
+		sh "chmod +x ./deployContainer.sh "
+		sh "./deployContainer.sh ${stagePath} ${deployFlag} ${unitFullPath}"		
 	}
 }
 
